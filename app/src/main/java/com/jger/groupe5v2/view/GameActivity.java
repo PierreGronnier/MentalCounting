@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.lang.Math;
+import java.util.Random;
 
 import com.jger.groupe5v2.controller.CalculBaseHelper;
 import com.jger.groupe5v2.controller.CalculDao;
@@ -24,6 +26,7 @@ public class GameActivity extends AppCompatActivity {
     Integer deuxiemeElement = 0;
     TypeOperationEnum typeOperation = null;
     TextView textViewCalcul;
+    TextView textViewQuestion;
     Integer BORNE_HAUTE = 9999;
     CalculService calculService;
 
@@ -33,6 +36,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         calculService = new CalculService(new CalculDao(new CalculBaseHelper(this)));
         textViewCalcul = findViewById(R.id.textviewCalcul);
+        textViewQuestion = findViewById(R.id.textViewQuestion);
+        majTextQuestion();
         Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(view -> ajouterNombre(1));
         Button button2 = findViewById(R.id.button_2);
@@ -54,9 +59,9 @@ public class GameActivity extends AppCompatActivity {
         Button button0 = findViewById(R.id.button_0);
         button0.setOnClickListener(view -> ajouterNombre(0));
         Button boutonAdd = findViewById(R.id.button_nouvelle_partie);
-        boutonAdd.setOnClickListener(view -> ajouterSymbol(TypeOperationEnum.ADD));
+        boutonAdd.setOnClickListener(menuItem -> videTextViewCalcul());;
         Button boutonSubstract = findViewById(R.id.button_Score);
-        boutonSubstract.setOnClickListener(view -> ajouterSymbol(TypeOperationEnum.SUBSTRACT));
+        boutonSubstract.setOnClickListener(menuItem -> Calcul());
 
 
     }
@@ -92,6 +97,41 @@ public class GameActivity extends AppCompatActivity {
         }
         textViewCalcul.setText(textAAfficher);
     }
+
+    private void majTextQuestion() {
+        String textAAfficher = "";
+        if (typeOperation == null) {
+            int min = 1;
+            int max = 99;
+
+            Random random = new Random();
+
+            int value = random.nextInt(max + min) + min;
+            premierElement = value;
+
+
+            int min1 = 1;
+            int max1 = 99;
+
+            Random random1 = new Random();
+
+            int value1 = random.nextInt(max + min) + min;
+            deuxiemeElement = value1;
+
+            textAAfficher = premierElement.toString() + "+" +  deuxiemeElement.toString();
+
+
+        } else {
+            textAAfficher = "ERREUR";
+        }
+        textViewQuestion.setText(textAAfficher);
+    }
+
+    private void Calcul(){
+      int resultat =  premierElement + deuxiemeElement ;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
