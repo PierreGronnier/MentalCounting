@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.lang.Math;
+
 import java.util.Random;
 
 import com.jger.groupe5v2.controller.CalculBaseHelper;
@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
     TypeOperationEnum typeOperation = null;
     TextView textViewCalcul;
     TextView textViewQuestion;
+    TextView textViewVie;
     Integer BORNE_HAUTE = 9999;
     CalculService calculService;
 
@@ -37,6 +38,7 @@ public class GameActivity extends AppCompatActivity {
         calculService = new CalculService(new CalculDao(new CalculBaseHelper(this)));
         textViewCalcul = findViewById(R.id.textviewCalcul);
         textViewQuestion = findViewById(R.id.textViewQuestion);
+        textViewVie = findViewById(R.id.toolbar_nbVie);
         majTextQuestion();
         Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(view -> ajouterNombre(1));
@@ -60,8 +62,7 @@ public class GameActivity extends AppCompatActivity {
         button0.setOnClickListener(view -> ajouterNombre(0));
         Button boutonAdd = findViewById(R.id.button_nouvelle_partie);
         boutonAdd.setOnClickListener(menuItem -> videTextViewCalcul());;
-        Button boutonSubstract = findViewById(R.id.button_Score);
-        boutonSubstract.setOnClickListener(menuItem -> Calcul());
+
 
 
     }
@@ -118,7 +119,21 @@ public class GameActivity extends AppCompatActivity {
             int value1 = random.nextInt(max + min) + min;
             deuxiemeElement = value1;
 
-            textAAfficher = premierElement.toString() + "+" +  deuxiemeElement.toString();
+            textAAfficher = premierElement.toString() + "+" + deuxiemeElement.toString();
+
+            Button buttonOK = findViewById(R.id.button_Score);
+            if (buttonOK.isPressed()){
+                int vie=3;
+                int resultat = premierElement + deuxiemeElement;
+                String str_resultat = String.valueOf(resultat);
+                 String str_calcul = textViewCalcul.getText().toString();
+                if (str_resultat == str_calcul) {
+                    //
+                }else{
+                    int vieUpdate = vie-1;
+                    textViewVie.setText(vieUpdate);
+                }
+            }
 
 
         } else {
@@ -127,9 +142,6 @@ public class GameActivity extends AppCompatActivity {
         textViewQuestion.setText(textAAfficher);
     }
 
-    private void Calcul(){
-      int resultat =  premierElement + deuxiemeElement ;
-    }
 
 
 
@@ -137,10 +149,9 @@ public class GameActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar, menu);
-        MenuItem boutonCalculer = menu.findItem(R.id.toolbarCaculer);
-        MenuItem boutonVider = menu.findItem(R.id.toolbarNettoyer);
-        boutonVider.setOnMenuItemClickListener(menuItem -> videTextViewCalcul());
-        boutonCalculer.setOnMenuItemClickListener(menuItem -> ouvrirDernierCalcul());
+        MenuItem boutonCalculer = menu.findItem(R.id.toolbarVie);
+
+
 
         return true;
     }
@@ -173,24 +184,5 @@ public class GameActivity extends AppCompatActivity {
             return 0;
     }
 
-    private boolean ouvrirDernierCalcul() {
-        try{
-            Intent intent = new Intent(this, ScoreActivity.class);
-            intent.putExtra("premierElement", premierElement);
-            intent.putExtra("deuxiemeElement", deuxiemeElement);
-            intent.putExtra("symbol", typeOperation.getSymbol());
-            intent.putExtra("resultat", faisLeCalcul());
-            Calcul calcul = new Calcul();
-            calcul.setPremierElement(premierElement);
-            calcul.setDeuxiemeElement(deuxiemeElement);
-            calcul.setSymbol(typeOperation.getSymbol());
-            calcul.setResultat(faisLeCalcul());
-            calculService.storeInDB(calcul);
-            startActivity(intent);
-        }catch (DivideException e){
-            Toast.makeText(this,getString(R.string.ERROR_DIVISION_ZERO),Toast.LENGTH_LONG).show();
-        }
 
-        return true;
-    }
 }

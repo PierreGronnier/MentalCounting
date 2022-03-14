@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/toolbarCaculer"
-        android:title="@string/toolbar_calculer"
+        android:id="@+id/toolbarVie"
+        android:title="@string/toolbar_vie"
         app:showAsAction="always" />
     <item
-        android:id="@+id/toolbarNettoyer"
-        android:title="@string/toolbar_nettoyer" />
+        android:id="@+id/toolbar_nbVie"
+        android:title="@string/nbVie"
+        app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+        app:showAsAction="always" />
 </menu>

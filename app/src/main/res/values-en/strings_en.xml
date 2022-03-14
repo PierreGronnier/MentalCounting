@@ -3,8 +3,7 @@
     <string name="bouton_calculer">Compute</string>
     <string name="bouton_derniere_operation">Last Compute</string>
     <string name="bouton_precedent">Previous</string>
-    <string name="toolbar_calculer">Compute</string>
-    <string name="toolbar_nettoyer">Clear</string>
+    <string name="toolbar_vie">Life :</string>
     <string name="ERROR_VALEUR_TROP_GRANDE">Value too high</string>
     <string name="ERROR_DIVISION_ZERO">Divide by 0</string>
 
