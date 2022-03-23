@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +25,12 @@ import com.jger.groupe5v2.model.TypeOperationEnum;
 public class GameActivity extends AppCompatActivity {
     Integer premierElement = 0;
     Integer deuxiemeElement = 0;
+    Integer Score = 0;
+    Integer vie = 3;
+    Menu menu;
     TypeOperationEnum typeOperation = null;
     TextView textViewCalcul;
     TextView textViewQuestion;
-    TextView textViewVie;
     Integer BORNE_HAUTE = 9999;
     CalculService calculService;
 
@@ -38,8 +41,6 @@ public class GameActivity extends AppCompatActivity {
         calculService = new CalculService(new CalculDao(new CalculBaseHelper(this)));
         textViewCalcul = findViewById(R.id.textviewCalcul);
         textViewQuestion = findViewById(R.id.textViewQuestion);
-        textViewVie = findViewById(R.id.toolbar_nbVie);
-        majTextQuestion();
         Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(view -> ajouterNombre(1));
         Button button2 = findViewById(R.id.button_2);
@@ -62,6 +63,11 @@ public class GameActivity extends AppCompatActivity {
         button0.setOnClickListener(view -> ajouterNombre(0));
         Button boutonAdd = findViewById(R.id.button_nouvelle_partie);
         boutonAdd.setOnClickListener(menuItem -> videTextViewCalcul());;
+        Button buttonOK = findViewById(R.id.button_Score);
+        buttonOK.setOnClickListener(view -> Calcul());
+        GestionVieScore();
+
+
 
 
 
@@ -99,9 +105,8 @@ public class GameActivity extends AppCompatActivity {
         textViewCalcul.setText(textAAfficher);
     }
 
-    private void majTextQuestion() {
+    private int Calcul() {
         String textAAfficher = "";
-        if (typeOperation == null) {
             int min = 1;
             int max = 99;
 
@@ -119,27 +124,40 @@ public class GameActivity extends AppCompatActivity {
             int value1 = random.nextInt(max + min) + min;
             deuxiemeElement = value1;
 
-            textAAfficher = premierElement.toString() + "+" + deuxiemeElement.toString();
+            String setOfCharacters = "+-x/";
+            int randomInt = random.nextInt(setOfCharacters.length());
+            char randomChar = setOfCharacters.charAt(randomInt);
 
-            Button buttonOK = findViewById(R.id.button_Score);
-            if (buttonOK.isPressed()){
-                int vie=3;
-                int resultat = premierElement + deuxiemeElement;
-                String str_resultat = String.valueOf(resultat);
-                 String str_calcul = textViewCalcul.getText().toString();
-                if (str_resultat == str_calcul) {
-                    //
-                }else{
-                    int vieUpdate = vie-1;
-                    textViewVie.setText(vieUpdate);
-                }
+            textAAfficher = premierElement.toString() + randomChar + deuxiemeElement.toString();
+
+
+           int resultat = 0;
+            String str_randomChar = String.valueOf(randomChar);
+            if(str_randomChar == "+"){
+                resultat = premierElement + deuxiemeElement;
+            }
+            if(str_randomChar == "-"){
+                resultat = premierElement - deuxiemeElement;
+            }
+            if(str_randomChar == "/"){
+                resultat = premierElement / deuxiemeElement;
+            }
+            if(str_randomChar == "x"){
+                resultat = premierElement * deuxiemeElement;
             }
 
+            textViewQuestion.setText(textAAfficher);
+            System.out.println(resultat);
 
-        } else {
-            textAAfficher = "ERREUR";
-        }
-        textViewQuestion.setText(textAAfficher);
+            return resultat;
+    }
+
+    private int GestionVieScore(){
+        int Vie=3;
+        int Score=0;
+
+
+        return 1;
     }
 
 
@@ -149,12 +167,14 @@ public class GameActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar, menu);
-        MenuItem boutonCalculer = menu.findItem(R.id.toolbarVie);
-
-
+        this.menu=menu;
 
         return true;
     }
+
+
+
+
 
     private boolean videTextViewCalcul() {
         TextView textViewCalcul = findViewById(R.id.textviewCalcul);
@@ -165,24 +185,7 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
 
-    private Integer faisLeCalcul() throws DivideException {
-            switch (typeOperation) {
-                case ADD:
-                    return premierElement + deuxiemeElement;
-                case DIVIDE:
-                    if (deuxiemeElement != 0) {
-                        return premierElement / deuxiemeElement;
-                    } else {
-                        throw new DivideException();
-                    }
 
-                case SUBSTRACT:
-                    return premierElement - deuxiemeElement;
-                case MULTIPLY:
-                    return premierElement * deuxiemeElement;
-            }
-            return 0;
-    }
 
 
 }

@@ -4,8 +4,17 @@
     <string name="bouton_derniere_operation">Last Compute</string>
     <string name="bouton_precedent">Previous</string>
     <string name="toolbar_vie">Life :</string>
+    <string name="nbVie">3</string>
     <string name="ERROR_VALEUR_TROP_GRANDE">Value too high</string>
     <string name="ERROR_DIVISION_ZERO">Divide by 0</string>
+    <string name="app">Application by : Gronnier Thomas and Gronnier Pierre</string>
+    <string name="lang">Language available: French and English</string>
+    <string name="button_retour_apropos">Previous</string>
+    <string name="button_apropos">About</string>
+    <string name="nouvelle_partie">New Game</string>
+    <string name="leaderboard">Leaderboard</string>
+
+
 
 
 

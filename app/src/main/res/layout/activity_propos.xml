@@ -4,34 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.AproposActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button_nouvelle_partie"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nouvelle_partie" />
+            android:layout_weight="1"
+            android:gravity="bottom|center"
+            android:text="@string/app" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|top"
+            android:text="@string/lang" />
 
         <Button
-            android:id="@+id/button_Score"
+            android:id="@+id/button_retour_apropos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/leaderboard" />
-
-        <Button
-            android:id="@+id/button_apropos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_apropos" />
+            android:layout_weight="0"
+            android:text="@string/button_retour_apropos" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

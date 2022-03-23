@@ -16,9 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button boutonCalculer = findViewById(R.id.button_nouvelle_partie);
         Button boutonDernierCalcul = findViewById(R.id.button_Score);
+        Button boutonApropos = findViewById(R.id.button_apropos);
         boutonCalculer.setOnClickListener(view -> lancerActivityCalcul());
         boutonDernierCalcul.setOnClickListener(view -> lancerActivityDernierCalcul());
-
+        boutonApropos.setOnClickListener(view -> lancerActivityApropos());
     }
 
     private void lancerActivityDernierCalcul() {
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void lancerActivityCalcul() {
         Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    private void lancerActivityApropos() {
+        Intent intent = new Intent(this, AproposActivity.class);
         startActivity(intent);
     }
 }

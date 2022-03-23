@@ -3,12 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/toolbar_score"
+        android:title="@string/score"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toolbar_nbscore"
+        android:title="@string/toolbar_nbscore"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/toolbarVie"
         android:title="@string/toolbar_vie"
         app:showAsAction="always" />
     <item
-        android:id="@+id/toolbar_nbVie"
-        android:title="@string/nbVie"
-        app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+        android:id="@+id/toolbar_nbvie"
+        android:title="@string/toolbar_nbvie"
         app:showAsAction="always" />
 </menu>

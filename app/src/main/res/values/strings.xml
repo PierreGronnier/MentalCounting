@@ -20,7 +20,17 @@
     <string name="toolbar_vie">Vie :</string>
     <string name="ERROR_VALEUR_TROP_GRANDE">Valeur trop grande</string>
     <string name="ERROR_DIVISION_ZERO">Division par zero</string>
-    <string name="nbVie" translatable="false">3</string>
+    <string name="nbVie">3</string>
+    <string name="vie" translatable="false">3</string>
+    <string name="score" translatable="false">Score:</string>
+    <string name="toolbar_nbscore" translatable="false">0</string>
+    <string name="toolbar_nbvie" translatable="false">3</string>
+    <string name="app">Application par : Gronnier Thomas et Gronnier Pierre</string>
+    <string name="lang">Langue Disponbile: Francais et Anglais</string>
+    <string name="button_retour_apropos">Retour</string>
+    <string name="button_apropos">A propos</string>
+    <string name="nouvelle_partie">Nouvelle partie</string>
+    <string name="leaderboard">Classement</string>
 
 
 </resources>

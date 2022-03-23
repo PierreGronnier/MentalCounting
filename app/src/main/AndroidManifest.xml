@@ -13,6 +13,9 @@
             android:name=".view.ScoreActivity"
             android:exported="false" />
         <activity
+            android:name=".view.AproposActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.GameActivity"
             android:exported="false" />
         <activity
