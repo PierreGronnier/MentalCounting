@@ -20,13 +20,13 @@
             android:id="@+id/lastCompute_nombreCalcul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Classement:" />
 
         <TextView
             android:id="@+id/lastCompute_textViewCalcul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Thomas" />
 
         <Button
             android:id="@+id/boutonPrecedent"

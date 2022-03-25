@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="3x5"
+            android:text="1+1"
             android:textAlignment="center"
             android:textSize="80sp" />
 
@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="15"
             android:textAlignment="center"
             android:textSize="70sp" />
 

@@ -2,6 +2,7 @@ package com.jger.groupe5v2.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,8 +26,9 @@ import com.jger.groupe5v2.model.TypeOperationEnum;
 public class GameActivity extends AppCompatActivity {
     Integer premierElement = 0;
     Integer deuxiemeElement = 0;
+    Integer Element = 0;
     Integer Score = 0;
-    Integer vie = 3;
+    Integer Vie = 3;
     Menu menu;
     TypeOperationEnum typeOperation = null;
     TextView textViewCalcul;
@@ -64,14 +66,15 @@ public class GameActivity extends AppCompatActivity {
         Button boutonAdd = findViewById(R.id.button_nouvelle_partie);
         boutonAdd.setOnClickListener(menuItem -> videTextViewCalcul());;
         Button buttonOK = findViewById(R.id.button_Score);
-        buttonOK.setOnClickListener(view -> Calcul());
-        GestionVieScore();
-
-
-
-
+        buttonOK.setOnClickListener(menuItem -> Calcul());
 
     }
+
+    private boolean bouttonOkMaj(){
+        videTextViewCalcul();
+        return true;
+    }
+
 
     private void ajouterSymbol(TypeOperationEnum typeOperation) {
         this.typeOperation = typeOperation;
@@ -80,16 +83,10 @@ public class GameActivity extends AppCompatActivity {
 
     public void ajouterNombre(Integer valeur) {
         if (typeOperation == null) {
-            if (10 * premierElement + valeur > BORNE_HAUTE) {
+            if (10 * Element + valeur > BORNE_HAUTE) {
                 Toast.makeText(this, getString(R.string.ERROR_VALEUR_TROP_GRANDE), Toast.LENGTH_LONG).show();
             } else {
-                premierElement = 10 * premierElement + valeur;
-            }
-        } else {
-            if (10 * deuxiemeElement + valeur > BORNE_HAUTE) {
-                Toast.makeText(this, getString(R.string.ERROR_VALEUR_TROP_GRANDE), Toast.LENGTH_LONG).show();
-            } else {
-                deuxiemeElement = 10 * deuxiemeElement + valeur;
+                Element = 10 * Element + valeur;
             }
         }
         majText();
@@ -98,14 +95,15 @@ public class GameActivity extends AppCompatActivity {
     private void majText() {
         String textAAfficher = "";
         if (typeOperation == null) {
-            textAAfficher = premierElement.toString();
-        } else {
-            textAAfficher = premierElement + " " + typeOperation.getSymbol() + " " + deuxiemeElement;
+            textAAfficher = Element.toString();
         }
         textViewCalcul.setText(textAAfficher);
+
+
     }
 
     private int Calcul() {
+        bouttonOkMaj();
         String textAAfficher = "";
             int min = 1;
             int max = 99;
@@ -121,47 +119,83 @@ public class GameActivity extends AppCompatActivity {
 
             Random random1 = new Random();
 
-            int value1 = random.nextInt(max + min) + min;
+            int value1 = random.nextInt(max1 + min1) + min1;
             deuxiemeElement = value1;
 
-            String setOfCharacters = "+-x/";
+            String setOfCharacters = "+-x";
             int randomInt = random.nextInt(setOfCharacters.length());
             char randomChar = setOfCharacters.charAt(randomInt);
 
             textAAfficher = premierElement.toString() + randomChar + deuxiemeElement.toString();
-
-
-           int resultat = 0;
-            String str_randomChar = String.valueOf(randomChar);
-            if(str_randomChar == "+"){
-                resultat = premierElement + deuxiemeElement;
-            }
-            if(str_randomChar == "-"){
-                resultat = premierElement - deuxiemeElement;
-            }
-            if(str_randomChar == "/"){
-                resultat = premierElement / deuxiemeElement;
-            }
-            if(str_randomChar == "x"){
-                resultat = premierElement * deuxiemeElement;
-            }
-
             textViewQuestion.setText(textAAfficher);
-            System.out.println(resultat);
 
+            String VieAAfficher="3";
+            String ScoreAAficher="0";
+           int resultat=0;
+            String str_randomChar = String.valueOf(randomChar);
+            if(str_randomChar.equals("+")){ ;
+                resultat = premierElement + deuxiemeElement;
+                String str_resultat = String.valueOf(resultat);
+                String str_Element = String.valueOf(Element);
+                if (Element == resultat){
+                    Score = Score + 1;
+                    ScoreAAficher = Score.toString();
+                    MenuItem score = menu.findItem(R.id.toolbar_nbscore);
+                    score.setTitle(ScoreAAficher);
+                }else{
+                    Vie = Vie - 1;
+                    VieAAfficher = Vie.toString();
+                    MenuItem nbVie = menu.findItem(R.id.toolbar_nbvie);
+                    nbVie.setTitle(VieAAfficher);
+                }
+            }
+            if(str_randomChar.equals("-")){
+                resultat = premierElement - deuxiemeElement;
+                String str_resultat = String.valueOf(resultat);
+                String str_Element = String.valueOf(Element);
+                if (Element == resultat){
+                    Score = Score + 1;
+                    ScoreAAficher = Score.toString();
+                    MenuItem score = menu.findItem(R.id.toolbar_nbscore);
+                    score.setTitle(ScoreAAficher);
+                }else{
+                    Vie = Vie - 1;
+                    VieAAfficher = Vie.toString();
+                    MenuItem nbVie = menu.findItem(R.id.toolbar_nbvie);
+                    nbVie.setTitle(VieAAfficher);
+                }
+
+            }
+            if(str_randomChar.equals("x")){
+                resultat = premierElement * deuxiemeElement;
+                String str_resultat = String.valueOf(resultat);
+                String str_Element = String.valueOf(Element);
+                if (Element == resultat){
+                    Score = Score + 1;
+                    ScoreAAficher = Score.toString();
+                    MenuItem score = menu.findItem(R.id.toolbar_nbscore);
+                    score.setTitle(ScoreAAficher);
+                }else{
+                    Vie = Vie - 1;
+                    VieAAfficher = Vie.toString();
+                    MenuItem nbVie = menu.findItem(R.id.toolbar_nbvie);
+                    nbVie.setTitle(VieAAfficher);
+                }
+
+
+            }
+
+            if(Vie==0){
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+
+
+
+
+            Element=0;
             return resultat;
     }
-
-    private int GestionVieScore(){
-        int Vie=3;
-        int Score=0;
-
-
-        return 1;
-    }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -172,20 +206,14 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
 
-
-
-
-
     private boolean videTextViewCalcul() {
         TextView textViewCalcul = findViewById(R.id.textviewCalcul);
         textViewCalcul.setText("");
         premierElement = 0;
+        Element =0;
         deuxiemeElement = 0;
         typeOperation = null;
         return true;
     }
-
-
-
 
 }
